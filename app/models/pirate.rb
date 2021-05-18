@@ -1,18 +1,16 @@
-require_relative 'config/environment'
+class Pirate
+  attr_reader :name, :weight, :height
 
-class App < Sinatra::Base
+  PIRATES = []
 
-  get '/' do
-    erb :index
+  def initialize(args)
+    @name = args[:name]
+    @weight = args[:weight]
+    @height = args[:height]
+    PIRATES << self
   end
 
-  get '/new' do
-    erb :create_puppy
+  def self.all
+    PIRATES
   end
-
-  post '/puppy' do
-    @puppy = Puppy.new(params['name'], params['breed'], params['months_old'])
-    erb :display_puppy
-  end
-
 end
